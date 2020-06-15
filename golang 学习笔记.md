@@ -292,3 +292,43 @@ func main() {
 2. 编写代码分别定义一个整型、浮点型、布尔型、字符串型变量，使用`fmt.Printf()`搭配`%T`分别打印出上述变量的值和类型。
 3. 编写代码统计出字符串`"hello沙河小王子"`中汉字的数量。(自己查资料)
 4. 打印9*9乘法表
+
+# switch
+
+```go
+func switchDemo1() {
+	finger := 3
+	switch finger {
+	case 1:
+		fmt.Println("大拇指")
+	case 2:
+		fmt.Println("食指")
+	case 3:
+		fmt.Println("中指")
+	case 4:
+		fmt.Println("无名指")
+	case 5:
+		fmt.Println("小拇指")
+	default:
+		fmt.Println("无效的输入！")
+	}
+}
+```
+
+### 注意：不同于java和js，go中的switch不需要在每个case下加break
+
+###### 一个分支可以有多个值，多个case值中间使用英文逗号分隔。
+
+```go
+func testSwitch3() {
+	switch n := 7; n {
+	case 1, 3, 5, 7, 9:
+		fmt.Println("奇数")
+	case 2, 4, 6, 8:
+		fmt.Println("偶数")
+	default:
+		fmt.Println(n)
+	}
+}
+```
+
