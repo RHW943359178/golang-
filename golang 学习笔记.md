@@ -505,3 +505,117 @@ fmt.Println(b1, b2)   //	b1: [1 2 3], b2: [100 2 3]
 
 2. ###### `[n]*T`表示指针数组，`*[n]T`表示数组指针 。
 
+## 切片（slice）
+
+
+
+切片指向了一个底层的数组。
+
+切片的长度就是它元素的个数。
+
+切片的容量是底层数组从切片的第一个元素到最后一个元素的数量。
+
+### 切片的定义
+
+```go
+// 切片的定义
+var s1 []int    // 定义一个存放int类型元素的切片
+var s2 []string // 定义一个存放string类型元素的切片
+fmt.Println(s1, s2)
+fmt.Println(s1 == nil) // true
+fmt.Println(s2 == nil) // true
+```
+
+### 切片的初始化
+
+```go
+// 初始化
+s1 = []int{1, 2, 3}
+s2 = []string{"沙河", "张江", "平山村"}
+fmt.Println(s1, s2)
+fmt.Println(s1 == nil) // false
+fmt.Println(s2 == nil) // false
+```
+
+### 切片的长度和容量
+
+```go
+// 长度和容量
+fmt.Printf("len(s1):%d cap(s1):%d\n", len(s1), cap(s1))
+fmt.Printf("len(s2):%d cap(s2):%d\n", len(s2), cap(s2)
+```
+
+
+
+### make
+
+make()函数用于创建指定长度和容量的切片。
+
+```go
+s1 := make([]int, 5, 10)
+fmt.Printf("s1=%v len(s1)=%d cap(s1)=%d\n", s1, len(s1), cap(s1))
+
+s2 := make([]int, 0, 10)
+fmt.Printf("s1=%v len(s1)=%d cap(s1)=%d\n", s2, len(s2), cap(s2))
+```
+
+### 切片的本质
+
+切片就是一个框，框住了一块连续的内存。
+
+切片属于引用类型，真正的数据都是保存在底层数组里的。
+
+
+
+判断一个切片是否是空的，要是用`len(s) == 0`来判断
+
+### append
+
+```go
+// 调用append函数必须用原来的切片变量接收返回值
+// append追加元素，原来的底层数组放不下的时候，Go底层就会把底层数组换一个
+// 必须用变量接收append的返回值
+s1 = append(s1, "广州")
+fmt.Printf("s1=%v len(s1)=%d cap(s1)=%d\n", s1, len(s1), cap(s1))
+s1 = append(s1, "杭州", "成都")
+fmt.Printf("s1=%v len(s1)=%d cap(s1)=%d\n", s1, len(s1), cap(s1))
+ss := []string{"武汉", "西安", "苏州"}
+s1 = append(s1, ss...) // ...表示拆开
+fmt.Printf("s1=%v len(s1)=%d cap(s1)=%d\n", s1, len(s1), cap(s1))
+```
+
+### copy
+
+```go
+a1 := []int{1, 3, 5}
+a2 := a1 // 赋值
+var a3 = make([]int, 3, 3)
+copy(a3, a1) // copy
+fmt.Println(a1, a2, a3)
+a1[0] = 100
+fmt.Println(a1, a2, a3)
+```
+
+## 指针
+
+###### Go语言中不存在指针操作，只需要记住两个符号：
+
+1. ###### `&`:取地址
+
+2. ###### `*`:根据地址取值
+
+## make和new的区别
+
+1. ###### make和new都是用来申请内存的
+
+2. ###### new很少用，一般用来给基本数据类型申请内存，`string`、`int`,返回的是对应类型的指针(\*string、\*int)。
+
+3. ###### make是用来给`slice`、`map`、`chan`申请内存的，make函数返回的的是对应的这三个类型本身
+
+## map
+
+###### map也是引用类型，必须初始化之后才能使用。
+
+###### `go doc builtin.delete`    查看文档命令
+
+###### [Golang标准库文档](https://studygolang.com/pkgdoc)
